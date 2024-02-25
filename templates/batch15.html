@@ -65,6 +65,7 @@
     <table id="Attendence-Table">
         <thead>
             <tr>
+                <td></td>
                 {% for header in rows[0] %}
                     <th>{{ header }}</th>
                 {% endfor %}
@@ -73,6 +74,7 @@
         <tbody>
             {% for row in rows[1:] %}
                 <tr>
+                    <td></td>
                     {% for item in row %}
                         <td>{{ item }}</td>
                     {% endfor %}
@@ -82,12 +84,19 @@
     </table>
 
     <script>
-        // Initialize DataTable with paging disabled
+
         $(document).ready(function() {
-            $('#Attendence-Table').DataTable({
-                "paging": false
-            });
-        });
+    var table = $('#Attendence-Table').DataTable({
+        "paging": false,
+        "order": [[ 1, 'asc' ]]
+    });
+
+    table.on( 'order.dt search.dt', function () {
+        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i + 1;
+        } );
+    } ).draw();
+});
     </script>
 </body>
 </html>
