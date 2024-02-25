@@ -39,11 +39,11 @@ jobs:
       run: |
         python generate_htmls.py freeze
 
-    - name: Clone MarketInsights repository
+    - name: Clone Attendence repository
       run: |
         git clone https://github.com/amandevopsinsiders/attendence_web.git
 
-    - name: Copy index.html to MarketInsights repository
+    - name: Copy index.html to Attendence repository
       run: |
         mv build/index.html attendence_web/index.html
         mv build/batch15 attendence_web/batch15.html
