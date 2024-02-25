@@ -1,0 +1,65 @@
+name: Build and Deploy Flask App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 11 * * 1-5"  # Runs at 11 AM UTC (4 PM IST) from Monday to Friday
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+        architecture: 'x64'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Download CSV
+      env:
+        USERNAME: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      run: |
+        python download_csv.py
+
+    - name: Generate attendence
+      run: |
+        python generate_attendence.py
+
+    - name: Generate HTMLs
+      run: |
+        python generate_htmls.py freeze
+
+    - name: Clone MarketInsights repository
+      run: |
+        git clone https://github.com/amandevopsinsiders/attendence_web.git
+
+    - name: Copy index.html to MarketInsights repository
+      run: |
+        mv build/index.html attendence_web/index.html
+        mv build/batch15 attendence_web/batch15.html
+
+    - name: Configure Git
+      run: |
+        git config --global user.email "aman.devsecops@gmail.com"
+        git config --global user.name "amandevopsinsiders"
+
+    - name: Push changes to attendence_web repository
+      env:
+        USERNAME: ${{ secrets.USERNAME }}
+        TOKEN: ${{ secrets.TOKEN }}
+      run: |
+        cd attendence_web
+        git remote set-url origin https://$USERNAME:$TOKEN@github.com/amandevopsinsiders/attendence_web.git
+        git add .
+        git commit -m "Update index.html"
+        git push origin main
