@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOpsInsiders Attendence</title>
+    <title>DevOpsInsiders Attendance</title>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y42F6Q2CDF"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -40,7 +40,7 @@
             text-decoration: none;
             display: inline-block;
             margin-right: 20px;
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            background: linear-gradient(135deg, #d79664 0%, #5958a7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -49,7 +49,7 @@
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-between flex-nowrap flex-row">
 
-        <a href="#" class="navbar-brand float-left">DevOpsInsiders Attendence </a>
+        <a href="#" class="navbar-brand float-left">DevOpsInsiders Attendance</a>
         <ul class="nav navbar-nav flex-row float-right">
             <li class="nav-item"><a class="nav-link pr-3" href="index.html">Batch14</a></li>
             <li class="nav-item"><a class="nav-link pr-3" href="batch15.html">Batch15</a></li>
@@ -57,19 +57,49 @@
         </ul>
     </nav>
 
-    <table id="stock-table">
-        <tr>
-            {% for header in rows[0] %}
-                <th>{{ header }}</th>
-            {% endfor %}
-        </tr>
-        {% for row in rows[1:] %}
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchTable()">
+
+    <table id="Attendence-Table">
+        <thead>
             <tr>
-                {% for item in row %}
-                    <td>{{ item }}</td>
+                {% for header in rows[0] %}
+                    <th>{{ header }}</th>
                 {% endfor %}
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for row in rows[1:] %}
+                <tr>
+                    {% for item in row %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
+
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("Attendence-Table");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>

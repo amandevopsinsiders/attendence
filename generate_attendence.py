@@ -47,35 +47,25 @@ def filter_weekend_columns(df):
     weekend_columns = [col for col in df.columns if "Saturday" in col or "Sunday" in col]
     return df[weekend_columns]
 
-# Main function to write combined data to a CSV file
+def generate_csv(data, filename):
+    combined_data = combine_data(data)
+    df = pd.DataFrame(combined_data).T  
+    df = filter_weekend_columns(df)
+    df.columns = pd.to_datetime(df.columns, format='%A %d %b')
+    
+    df = df.sort_index(axis=1, ascending=False)
+    df.columns = df.columns.strftime('%A %d %b')
+
+    df.to_csv(filename)
+
 def main():
     folder_path = "down"
+
     batch14 = read_csv_files_for_batch14(folder_path)
-    
-    
-    
-    combined_data = combine_data(batch14)
-    
-    # Convert combined data into a DataFrame
-    df = pd.DataFrame(combined_data).T  # Transpose for correct orientation
-    
-    # Filter columns to only include Saturdays and Sundays
-    df_weekend = filter_weekend_columns(df)
-    
-    # Write DataFrame to a CSV file
-    df_weekend.to_csv("attendance_batch14.csv")
+    generate_csv(batch14, "attendance_batch14.csv")
 
     batch15 = read_csv_files_for_batch15(folder_path)
-    combined_data = combine_data(batch15)
-    
-    # Convert combined data into a DataFrame
-    df = pd.DataFrame(combined_data).T  # Transpose for correct orientation
-    
-    # Filter columns to only include Saturdays and Sundays
-    df_weekend = filter_weekend_columns(df)
-    
-    # Write DataFrame to a CSV file
-    df_weekend.to_csv("attendance_batch15.csv")
+    generate_csv(batch15, "attendance_batch15.csv")
 
 if __name__ == "__main__":
     main()
