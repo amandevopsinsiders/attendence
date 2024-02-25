@@ -27,7 +27,7 @@ jobs:
 
     - name: Download CSV
       env:
-        USERNAME: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       run: |
         python download_csv.py
 
