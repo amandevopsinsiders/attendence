@@ -38,28 +38,122 @@
         th {
             background-color: #f2f2f2;
         }
+
+        .custom-navbar {
+        background-size: cover;
+        background-color: rgb(193, 134, 121);
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 2rem;
+        height: 150px;
+            }
         .navbar-brand {
-            font-size: 3rem; /* Adjust the size as per your preference */
+            font-size: 3rem;
             font-weight: bold;
-            color: #2a4d69;
+            color: rgb(242, 76, 4);
             text-decoration: none;
+            letter-spacing: 6px;
             display: inline-block;
-            margin-right: 20px;
-            background: linear-gradient(135deg, #d79664 0%, #5958a7 100%);
+            background: linear-gradient(135deg, #17110c 0%, #0f0e1d 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        .center-text {
+        text-align: center;
+        }
+
+        .content {
+        padding-bottom: 60px;
+        }
+
+
+
+        .display-1 {
+        color: rgb(242, 76, 4);
+        font-weight: bold;
+        text-shadow: 2px 2px 4px white;
+        letter-spacing: 6px;
+        }
+
+        .navbar-nav {
+        margin: 0 auto;
+        }
+
+        .nav-item {
+        margin-right: 50px;
+        }
+
+        .made-with-love {
+        float: right;
+        }
+
+        .quote {
+        font-family: 'Great Vibes', cursive;
+        font-size: 36px;
+        font-weight: bold;
+        color: rgb(109, 118, 156);
+        }
+        .nav-link {
+                    color: white;
+                    font-weight: bold;
+        }
+
+        .navbar-brand h1 {
+                        font-size: 3vw;
+                    }
+
+                    @media (max-width: 768px) {
+                        .navbar-brand h1 {
+                            font-size: 5vw; 
+                        }
+                    }
+                    @media (max-width: 768px) {
+                .navbar-brand {
+                    font-size: 1.5rem; 
+                }
+            }
     </style>
 </head>
 <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-between flex-nowrap flex-row">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark custom-navbar">
+            <div class="container-fluid">
+                <span class="navbar-brand h1" style="margin-left: auto; margin-right: auto; display: flex; align-items: center;">
+                    <img src="devopsinsiders.svg" alt="DevOpsInsiders" width="80" height="80" class="d-inline-block align-top">
+                    <h1 class=""><strong>DevOpsInsiders Attendance</strong></h1>
+                </span>
+            </div>
+        </nav>
+          <nav class="navbar navbar-expand-lg bg-dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon flex-row "></span>
+              </button>
 
-        <a href="#" class="navbar-brand float-left">DevOpsInsiders Attendance</a>
-        <ul class="nav navbar-nav flex-row float-right">
-            <li class="nav-item"><a class="nav-link pr-3" href="index.html">Batch14</a></li>
-            <li class="nav-item"><a class="nav-link pr-3" href="batch15.html">Batch15</a></li>
-        </ul>
-    </nav>
+            <ul class="navbar-nav flex-row ">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Batch14</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="batch15.html">Batch15</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="old_batch14.html">OldData Batch14</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="old_batch15.html">OldData Batch15</a>
+                </li>
+            </ul>
+              </ul>
+            </div>
+            </div>
+          </nav>
     <p style="font-size: 1.2rem; margin-top: 20px;" class="text-muted">You can search any name and sort any column after the heading.</p>
 
     <table id="Attendence-Table">
