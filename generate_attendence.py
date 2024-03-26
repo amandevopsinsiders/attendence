@@ -55,7 +55,9 @@ def generate_csv(data, filename):
 
     # Sort the columns based on the day names
     days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    df.columns = sorted(df.columns, key=lambda x: days_order.index(x.split(' ')[0]))
+    #df.columns = sorted(df.columns, key=lambda x: days_order.index(x.split(' ')[0]))
+    df.columns = sorted(df.columns, key=lambda x: (days_order.index(x.split(' ')[0]), datetime.strptime(x.split(' ')[-1], "%d %b")))
+
 
     df.to_csv(filename)
 
